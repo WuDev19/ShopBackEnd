@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.function.Function;
+
 @RestController
 @RequestMapping("/api/user")
 public class NguoiDungController {
@@ -26,7 +28,7 @@ public class NguoiDungController {
         nguoidung.setSdt(userRequestDTO.getSdt());
         nguoidung.setAnhdaidien(userRequestDTO.getAnhdaidien());
         Nguoidung nguoiDungResponse = service.taoNguoiDung(nguoidung);
-        if(nguoiDungResponse == null){
+        if (nguoiDungResponse == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can not create user");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(nguoiDungResponse);
@@ -34,11 +36,9 @@ public class NguoiDungController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<NguoiDungDTO> getNguoiDungTheoId(@PathVariable("id") String id) {
-        NguoiDungDTO nguoiDungDTO = service.findById(id);
-        if (nguoiDungDTO == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(nguoiDungDTO);
+        return service.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

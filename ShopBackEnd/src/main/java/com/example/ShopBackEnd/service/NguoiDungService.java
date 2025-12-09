@@ -19,32 +19,27 @@ public class NguoiDungService {
         return repository.save(nd);
     }
 
-    public NguoiDungDTO findById(String id) {
-
-        Optional<Nguoidung> opt = repository.findById(id);
-        if (opt.isEmpty()) {
-            return null;
-        }
-
-        Nguoidung nd = opt.get();
-
-        NguoiDungDTO nguoiDungDTO = new NguoiDungDTO();
-        nguoiDungDTO.setMaND(nd.getMaND());
-        nguoiDungDTO.setTen(nd.getTen());
-        nguoiDungDTO.setEmail(nd.getEmail());
-        nguoiDungDTO.setSdt(nd.getSdt());
-        nguoiDungDTO.setGioitinh(nd.getGioitinh());
-        nguoiDungDTO.setAnhdaidien(nd.getAnhdaidien());
-        nguoiDungDTO.setListDiaChi(nd.getListDiaChi().stream().map(diaChi ->
-                new DiaChiDTO(diaChi.getMaDiaChi(),
-                        diaChi.getTenCuThe(),
-                        diaChi.getTenXa(),
-                        diaChi.getTenHuyen(),
-                        diaChi.getTenThanhPho(),
-                        diaChi.getQuocGia()))
-                .collect(Collectors.toSet()));
-
-        return nguoiDungDTO;
+    public Optional<NguoiDungDTO> findById(String id) {
+        return repository.findById(id)
+                .map(nd -> {
+                    NguoiDungDTO dto = new NguoiDungDTO();
+                    dto.setMaND(nd.getMaND());
+                    dto.setTen(nd.getTen());
+                    dto.setEmail(nd.getEmail());
+                    dto.setSdt(nd.getSdt());
+                    dto.setGioitinh(nd.getGioitinh());
+                    dto.setAnhdaidien(nd.getAnhdaidien());
+                    dto.setListDiaChi(nd.getListDiaChi().stream()
+                            .map(d -> new DiaChiDTO(
+                                    d.getMaDiaChi(),
+                                    d.getTenCuThe(),
+                                    d.getTenXa(),
+                                    d.getTenHuyen(),
+                                    d.getTenThanhPho(),
+                                    d.getQuocGia()))
+                            .collect(Collectors.toSet()));
+                    return dto;
+                });
     }
 
 }
