@@ -1,16 +1,13 @@
 package com.example.ShopBackEnd.controller;
 
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
-import com.example.ShopBackEnd.dto.request.UserRequestDTO;
+import com.example.ShopBackEnd.dto.request.UserCreateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
 import com.example.ShopBackEnd.service.NguoiDungService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.function.Function;
 
 @RestController
 @RequestMapping("/api/user")
@@ -20,13 +17,13 @@ public class NguoiDungController {
     private NguoiDungService service;
 
     @PostMapping("/create")
-    public ResponseEntity<?> taoNguoiDung(@RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<?> taoNguoiDung(@RequestBody UserCreateDTO userCreateDTO) {
         Nguoidung nguoidung = new Nguoidung();
-        nguoidung.setMaND(userRequestDTO.getMaND());
-        nguoidung.setTen(userRequestDTO.getTen());
-        nguoidung.setEmail(userRequestDTO.getEmail());
-        nguoidung.setSdt(userRequestDTO.getSdt());
-        nguoidung.setAnhdaidien(userRequestDTO.getAnhdaidien());
+        nguoidung.setMaND(userCreateDTO.getMaND());
+        nguoidung.setTen(userCreateDTO.getTen());
+        nguoidung.setEmail(userCreateDTO.getEmail());
+        nguoidung.setSdt(userCreateDTO.getSdt());
+        nguoidung.setAnhdaidien(userCreateDTO.getAnhdaidien());
         Nguoidung nguoiDungResponse = service.taoNguoiDung(nguoidung);
         if (nguoiDungResponse == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can not create user");
