@@ -2,6 +2,7 @@ package com.example.ShopBackEnd.controller;
 
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
 import com.example.ShopBackEnd.dto.request.UserCreateDTO;
+import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
 import com.example.ShopBackEnd.service.NguoiDungService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class NguoiDungController {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/update/name")
+    public ResponseEntity<?> updateNameGenderUser(@RequestBody UserUpdateDTO userUpdateDTO){
+        return ResponseEntity.ok(service.updateNameGenderUser(userUpdateDTO));
     }
 
 }

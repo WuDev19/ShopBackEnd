@@ -33,7 +33,7 @@ public class Nguoidung {
     private String sdt;
 
     @Column(name = "gioitinh", length = 6, insertable = false)
-    @Pattern(regexp = "^(Male|Female)$", message = "Chỉ có thể là male hoặc female")
+    @Pattern(regexp = "^(Male|Female|ND)$", message = "Chỉ có thể là male hoặc female")
     @Size(max = 6, message = "Giới tính không được vượt quá 6 ký tự")
     private String gioitinh;
 
