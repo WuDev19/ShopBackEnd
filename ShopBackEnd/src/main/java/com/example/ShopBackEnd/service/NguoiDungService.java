@@ -43,7 +43,7 @@ public class NguoiDungService {
                 });
     }
 
-    public Nguoidung updateNameGenderUser(UserUpdateDTO userUpdateDTO){
+    public Nguoidung updateField(UserUpdateDTO userUpdateDTO){
          Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow();
          if(userUpdateDTO.getTen() != null){
              nguoidung.setTen(userUpdateDTO.getTen());

@@ -39,9 +39,9 @@ public class NguoiDungController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/update/name")
-    public ResponseEntity<?> updateNameGenderUser(@RequestBody UserUpdateDTO userUpdateDTO){
-        return ResponseEntity.ok(service.updateNameGenderUser(userUpdateDTO));
+    @PatchMapping("/update/field")
+    public ResponseEntity<?> updateField(@RequestBody UserUpdateDTO userUpdateDTO){
+        return ResponseEntity.ok(service.updateField(userUpdateDTO));
     }
 
 }
