@@ -43,7 +43,7 @@ public class NguoiDungService {
                 });
     }
 
-    public Nguoidung updateField(UserUpdateDTO userUpdateDTO){
+    public Nguoidung updateNameGender(UserUpdateDTO userUpdateDTO){
          Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow();
          if(userUpdateDTO.getTen() != null){
              nguoidung.setTen(userUpdateDTO.getTen());
@@ -66,6 +66,22 @@ public class NguoiDungService {
             }
         }
          return repository.save(nguoidung);
+    }
+
+    public Nguoidung updatePhone(String id, String phone){
+        Nguoidung nguoidung = repository.findById(id).orElseThrow();
+        if(phone != null){
+            nguoidung.setSdt(phone);
+        }
+        return repository.save(nguoidung);
+    }
+
+    public Nguoidung updateEmail(String id, String email){
+        Nguoidung nguoidung = repository.findById(id).orElseThrow();
+        if(email != null){
+            nguoidung.setEmail(email);
+        }
+        return repository.save(nguoidung);
     }
 
 }
