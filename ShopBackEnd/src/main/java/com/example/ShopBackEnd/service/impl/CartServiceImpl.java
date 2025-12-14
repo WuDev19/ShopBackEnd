@@ -1,4 +1,4 @@
-package com.example.ShopBackEnd.service;
+package com.example.ShopBackEnd.service.impl;
 
 import com.example.ShopBackEnd.constants.StringConst;
 import com.example.ShopBackEnd.dto.get.CartDTO;
@@ -7,6 +7,7 @@ import com.example.ShopBackEnd.dto.request.CartItemRequest;
 import com.example.ShopBackEnd.dto.request.CartRequest;
 import com.example.ShopBackEnd.entity.*;
 import com.example.ShopBackEnd.repository.*;
+import com.example.ShopBackEnd.service.inter.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class CartService {
+public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartRepository cartRepository;

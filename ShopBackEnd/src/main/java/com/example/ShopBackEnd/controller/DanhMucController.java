@@ -1,6 +1,7 @@
 package com.example.ShopBackEnd.controller;
 
-import com.example.ShopBackEnd.service.DanhMucService;
+import com.example.ShopBackEnd.service.impl.DanhMucServiceImpl;
+import com.example.ShopBackEnd.service.inter.DanhMucService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

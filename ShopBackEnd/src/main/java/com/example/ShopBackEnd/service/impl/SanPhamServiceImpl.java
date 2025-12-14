@@ -1,4 +1,4 @@
-package com.example.ShopBackEnd.service;
+package com.example.ShopBackEnd.service.impl;
 
 import com.example.ShopBackEnd.dto.get.sanpham.SanPhamChiTietDTO;
 import com.example.ShopBackEnd.dto.get.sanpham.SanPhamDTO;
@@ -10,6 +10,7 @@ import com.example.ShopBackEnd.entity.SanPhamChiTiet;
 import com.example.ShopBackEnd.entity.Sanpham;
 import com.example.ShopBackEnd.repository.NguoiBanRepository;
 import com.example.ShopBackEnd.repository.SanPhamRepository;
+import com.example.ShopBackEnd.service.inter.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +26,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class SanPhamService {
+public class SanPhamServiceImpl implements SanPhamService {
 
     @Autowired
     private SanPhamRepository sanPhamRepository;

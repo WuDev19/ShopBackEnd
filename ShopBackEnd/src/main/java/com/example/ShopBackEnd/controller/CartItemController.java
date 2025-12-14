@@ -1,6 +1,7 @@
 package com.example.ShopBackEnd.controller;
 
-import com.example.ShopBackEnd.service.CartItemService;
+import com.example.ShopBackEnd.service.impl.CartItemServiceImpl;
+import com.example.ShopBackEnd.service.inter.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,11 +2,8 @@ package com.example.ShopBackEnd.controller;
 
 import com.example.ShopBackEnd.dto.get.CartDTO;
 import com.example.ShopBackEnd.dto.request.CartAndCartItemRequest;
-import com.example.ShopBackEnd.dto.request.CartItemRequest;
-import com.example.ShopBackEnd.dto.request.CartRequest;
-import com.example.ShopBackEnd.entity.CartItem;
-import com.example.ShopBackEnd.entity.GioHang;
-import com.example.ShopBackEnd.service.CartService;
+import com.example.ShopBackEnd.service.impl.CartServiceImpl;
+import com.example.ShopBackEnd.service.inter.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

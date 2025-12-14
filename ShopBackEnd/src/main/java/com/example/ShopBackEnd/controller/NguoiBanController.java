@@ -2,7 +2,8 @@ package com.example.ShopBackEnd.controller;
 
 import com.example.ShopBackEnd.dto.get.NguoiBanDTO;
 import com.example.ShopBackEnd.entity.Nguoiban;
-import com.example.ShopBackEnd.service.NguoiBanService;
+import com.example.ShopBackEnd.service.impl.NguoiBanServiceImpl;
+import com.example.ShopBackEnd.service.inter.NguoiBanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

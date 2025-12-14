@@ -2,7 +2,7 @@ package com.example.ShopBackEnd.controller;
 
 import com.example.ShopBackEnd.dto.get.sanpham.SanPhamInDetailDTO;
 import com.example.ShopBackEnd.entity.Sanpham;
-import com.example.ShopBackEnd.service.SanPhamService;
+import com.example.ShopBackEnd.service.inter.SanPhamService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

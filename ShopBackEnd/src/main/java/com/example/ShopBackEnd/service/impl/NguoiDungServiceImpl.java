@@ -1,17 +1,19 @@
-package com.example.ShopBackEnd.service;
+package com.example.ShopBackEnd.service.impl;
 
 import com.example.ShopBackEnd.dto.get.DiaChiDTO;
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
 import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
 import com.example.ShopBackEnd.repository.NguoiDungRepository;
+import com.example.ShopBackEnd.service.inter.NguoiDungService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class NguoiDungService {
+public class NguoiDungServiceImpl implements NguoiDungService {
 
     @Autowired
     private NguoiDungRepository repository;
@@ -43,42 +45,41 @@ public class NguoiDungService {
                 });
     }
 
-    public Nguoidung updateNameGender(UserUpdateDTO userUpdateDTO){
-         Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow();
-         if(userUpdateDTO.getTen() != null){
-             nguoidung.setTen(userUpdateDTO.getTen());
-         }
-         if (userUpdateDTO.getAnhdaidien() != null){
-             nguoidung.setAnhdaidien(userUpdateDTO.getAnhdaidien());
-         }
-         if (userUpdateDTO.getSdt() != null){
-             nguoidung.setSdt(userUpdateDTO.getSdt());
-         }
-         if(userUpdateDTO.getEmail() != null){
-             nguoidung.setEmail(userUpdateDTO.getEmail());
-         }
-        if(userUpdateDTO.getGioitinh() != null){
-            nguoidung.setGioitinh(userUpdateDTO.getGioitinh());
+    public Nguoidung updateNameGender(UserUpdateDTO userUpdateDTO) {
+        Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow();
+        if (userUpdateDTO.getTen() != null) {
+            nguoidung.setTen(userUpdateDTO.getTen());
         }
-        else {
-            if(nguoidung.getGioitinh() == null){
+        if (userUpdateDTO.getAnhdaidien() != null) {
+            nguoidung.setAnhdaidien(userUpdateDTO.getAnhdaidien());
+        }
+        if (userUpdateDTO.getSdt() != null) {
+            nguoidung.setSdt(userUpdateDTO.getSdt());
+        }
+        if (userUpdateDTO.getEmail() != null) {
+            nguoidung.setEmail(userUpdateDTO.getEmail());
+        }
+        if (userUpdateDTO.getGioitinh() != null) {
+            nguoidung.setGioitinh(userUpdateDTO.getGioitinh());
+        } else {
+            if (nguoidung.getGioitinh() == null) {
                 nguoidung.setGioitinh("ND");
             }
         }
-         return repository.save(nguoidung);
+        return repository.save(nguoidung);
     }
 
-    public Nguoidung updatePhone(String id, String phone){
+    public Nguoidung updatePhone(String id, String phone) {
         Nguoidung nguoidung = repository.findById(id).orElseThrow();
-        if(phone != null){
+        if (phone != null) {
             nguoidung.setSdt(phone);
         }
         return repository.save(nguoidung);
     }
 
-    public Nguoidung updateEmail(String id, String email){
+    public Nguoidung updateEmail(String id, String email) {
         Nguoidung nguoidung = repository.findById(id).orElseThrow();
-        if(email != null){
+        if (email != null) {
             nguoidung.setEmail(email);
         }
         return repository.save(nguoidung);

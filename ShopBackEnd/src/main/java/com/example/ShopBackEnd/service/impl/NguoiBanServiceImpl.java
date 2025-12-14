@@ -1,4 +1,4 @@
-package com.example.ShopBackEnd.service;
+package com.example.ShopBackEnd.service.impl;
 
 import com.example.ShopBackEnd.constants.StringConst;
 import com.example.ShopBackEnd.dto.get.DiaChiDTO;
@@ -9,6 +9,7 @@ import com.example.ShopBackEnd.entity.Nguoiban;
 import com.example.ShopBackEnd.entity.Nguoidung;
 import com.example.ShopBackEnd.repository.NguoiBanRepository;
 import com.example.ShopBackEnd.repository.NguoiDungRepository;
+import com.example.ShopBackEnd.service.inter.NguoiBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class NguoiBanService {
+public class NguoiBanServiceImpl implements NguoiBanService {
 
     @Autowired
     private NguoiBanRepository nguoiBanRepository;
