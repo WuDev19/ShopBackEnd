@@ -8,84 +8,73 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Map;
 
+/*tách luồng xử lý rất hay, nếu ko có exception thì chạy vào rest controller,
+    nếu có exception thì sẽ chạy vào controller nhưng mà là rest controller advice
+*/
 @RestController
 @RequestMapping("/api/sanpham")
 public class SanPhamController {
 
-    @Autowired
-    private SanPhamService sanPhamService;
+    private final SanPhamService sanPhamService;
+
+    public SanPhamController(SanPhamService sanPhamService) {
+        this.sanPhamService = sanPhamService;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Sanpham> taoSanPham(@Valid @RequestBody Sanpham sanpham, @RequestParam Integer maNguoiBan) {
-        Sanpham tmp = sanPhamService.taoSanPham(sanpham, maNguoiBan);
-        return ResponseEntity.ok(tmp);
+        return ResponseEntity.ok(sanPhamService.taoSanPham(sanpham, maNguoiBan));
     }
 
     @GetMapping("/get")
     public ResponseEntity<?> getSanPhamTheoTrang(@RequestParam int pageNumber) {
-        Map<String, Object> response = sanPhamService.getSanPhamTheoTrang(pageNumber);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(sanPhamService.getSanPhamTheoTrang(pageNumber));
     }
 
     @GetMapping("/get/{theLoai}")
-    public ResponseEntity<?> phanTrangSanPhamTheoTheLoai(@RequestParam int pageNumber, @PathVariable String theLoai){
-        Map<String, Object> response = sanPhamService.phanTrangSanPhamTheoTheLoai(pageNumber, theLoai);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> phanTrangSanPhamTheoTheLoai(@RequestParam int pageNumber, @PathVariable String theLoai) {
+        return ResponseEntity.ok(sanPhamService.phanTrangSanPhamTheoTheLoai(pageNumber, theLoai));
     }
 
     @GetMapping("/search/{text}")
-    public ResponseEntity<?> timKiemSanPhamPhanTrang(@RequestParam int pageNumber, @PathVariable String text){
-        Map<String, Object> response = sanPhamService.timKiemSanPhamTheoTrang(text, pageNumber);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> timKiemSanPhamPhanTrang(@RequestParam int pageNumber, @PathVariable String text) {
+        return ResponseEntity.ok(sanPhamService.timKiemSanPhamTheoTrang(text, pageNumber));
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<SanPhamInDetailDTO> getSanPhamDetail(@PathVariable Integer id){
-        try{
-            SanPhamInDetailDTO sanPhamInDetailDTO = sanPhamService.findSanPham(id);
-            return ResponseEntity.ok(sanPhamInDetailDTO);
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-
+    public ResponseEntity<SanPhamInDetailDTO> getSanPhamDetail(@PathVariable Integer id) {
+        return ResponseEntity.ok(sanPhamService.findSanPham(id));
     }
 
     @GetMapping("/get/shop/{id}")
-    public ResponseEntity<?> findSanPhamByIdShop(@RequestParam int pageNumber, @PathVariable Integer id){
-        Map<String, Object> response = sanPhamService.findSanPhamByIdShop(id, pageNumber);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> findSanPhamByIdShop(@RequestParam int pageNumber, @PathVariable Integer id) {
+        return ResponseEntity.ok(sanPhamService.findSanPhamByIdShop(id, pageNumber));
     }
 
     @GetMapping("/get/related/{id}")
-    public ResponseEntity<?> getSanPhamRelated(@RequestParam int pageNumber, @PathVariable Integer id){
-        Map<String, Object> response = sanPhamService.getSanPhamRelated(id, pageNumber);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> getSanPhamRelated(@RequestParam int pageNumber, @PathVariable Integer id) {
+        return ResponseEntity.ok(sanPhamService.getSanPhamRelated(id, pageNumber));
     }
 
     @GetMapping("/get/spct/{id}")
-    public ResponseEntity<?> getSanPhamChiTiet(@PathVariable Integer id){
+    public ResponseEntity<?> getSanPhamChiTiet(@PathVariable Integer id) {
         return ResponseEntity.ok(sanPhamService.getSanPhamChiTiet(id));
     }
 
     @GetMapping("/searchShop/{id}")
-    public ResponseEntity<?> timKiemSanPhamCuaShop(@PathVariable Integer id, @RequestParam String text, @RequestParam int pageNumber){
-        Map<String, Object> response = sanPhamService.timKiemSanPhamCuaShop(id, text, pageNumber);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> timKiemSanPhamCuaShop(@PathVariable Integer id, @RequestParam String text, @RequestParam int pageNumber) {
+        return ResponseEntity.ok(sanPhamService.timKiemSanPhamCuaShop(id, text, pageNumber));
     }
 
     @GetMapping("/bestSeller/{id}")
-    public ResponseEntity<?> getBestSellerProductByShop(@PathVariable Integer id, @RequestParam int pageNumber){
-        Map<String, Object> response = sanPhamService.getBestSellerProductByShop(id, pageNumber);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> getBestSellerProductByShop(@PathVariable Integer id, @RequestParam int pageNumber) {
+        return ResponseEntity.ok(sanPhamService.getBestSellerProductByShop(id, pageNumber));
     }
 
     @GetMapping("/categoryProduct/{id}")
-    public ResponseEntity<?> getCategoryAndProductByShop(@PathVariable Integer id, @RequestParam String tenDanhMuc, @RequestParam int pageNumber){
-        Map<String, Object> response = sanPhamService.getCategoryAndProductByShop(id, tenDanhMuc, pageNumber);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> getCategoryAndProductByShop(@PathVariable Integer id, @RequestParam String tenDanhMuc, @RequestParam int pageNumber) {
+        return ResponseEntity.ok(sanPhamService.getCategoryAndProductByShop(id, tenDanhMuc, pageNumber));
     }
 
 }
