@@ -15,8 +15,11 @@ import java.util.stream.Collectors;
 @Service
 public class NguoiDungServiceImpl implements NguoiDungService {
 
-    @Autowired
-    private NguoiDungRepository repository;
+    private final NguoiDungRepository repository;
+
+    public NguoiDungServiceImpl(NguoiDungRepository repository){
+        this.repository = repository;
+    }
 
     public Nguoidung taoNguoiDung(Nguoidung nd) {
         return repository.save(nd);

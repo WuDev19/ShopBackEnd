@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class NguoiDungController {
 
-    @Autowired
-    private NguoiDungService nguoiDungService;
+    private final NguoiDungService nguoiDungService;
+
+    public NguoiDungController(NguoiDungService nguoiDungService){
+        this.nguoiDungService = nguoiDungService;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> taoNguoiDung(@RequestBody UserCreateDTO userCreateDTO) {
