@@ -2,11 +2,15 @@ package com.example.ShopBackEnd.service.impl;
 
 import com.example.ShopBackEnd.dto.get.DiaChiDTO;
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
+import com.example.ShopBackEnd.dto.request.UserCreateDTO;
 import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
+import com.example.ShopBackEnd.exception.customexception.ResourcesNotFoundException;
 import com.example.ShopBackEnd.repository.NguoiDungRepository;
 import com.example.ShopBackEnd.service.inter.NguoiDungService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,14 +21,22 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 
     private final NguoiDungRepository repository;
 
-    public NguoiDungServiceImpl(NguoiDungRepository repository){
+    public NguoiDungServiceImpl(NguoiDungRepository repository) {
         this.repository = repository;
     }
 
-    public Nguoidung taoNguoiDung(Nguoidung nd) {
-        return repository.save(nd);
+    @Override
+    public Nguoidung taoNguoiDung(UserCreateDTO userCreateDTO) {
+        Nguoidung nguoidung = new Nguoidung();
+        nguoidung.setMaND(userCreateDTO.getMaND());
+        nguoidung.setTen(userCreateDTO.getTen());
+        nguoidung.setEmail(userCreateDTO.getEmail());
+        nguoidung.setSdt(userCreateDTO.getSdt());
+        nguoidung.setAnhdaidien(userCreateDTO.getAnhdaidien());
+        return repository.save(nguoidung);
     }
 
+    @Override
     public Optional<NguoiDungDTO> findById(String id) {
         return repository.findById(id)
                 .map(nd -> {
@@ -48,6 +60,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
                 });
     }
 
+    @Override
     public Nguoidung updateNameGender(UserUpdateDTO userUpdateDTO) {
         Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow();
         if (userUpdateDTO.getTen() != null) {
@@ -72,6 +85,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         return repository.save(nguoidung);
     }
 
+    @Override
     public Nguoidung updatePhone(String id, String phone) {
         Nguoidung nguoidung = repository.findById(id).orElseThrow();
         if (phone != null) {
@@ -80,10 +94,21 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         return repository.save(nguoidung);
     }
 
+    @Override
     public Nguoidung updateEmail(String id, String email) {
         Nguoidung nguoidung = repository.findById(id).orElseThrow();
         if (email != null) {
             nguoidung.setEmail(email);
+        }
+        return repository.save(nguoidung);
+    }
+
+    @Override
+    public Nguoidung updateAvatar(String id, String urlAvatar) {
+        Nguoidung nguoidung = repository.findById(id).orElseThrow(() ->
+                new ResourcesNotFoundException("Không tìm thấy người dùng"));
+        if (urlAvatar != null) {
+            nguoidung.setAnhdaidien(urlAvatar);
         }
         return repository.save(nguoidung);
     }
