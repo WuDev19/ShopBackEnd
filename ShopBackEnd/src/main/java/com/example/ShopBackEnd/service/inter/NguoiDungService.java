@@ -5,13 +5,11 @@ import com.example.ShopBackEnd.dto.request.UserCreateDTO;
 import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
 
-import java.util.Optional;
-
 public interface NguoiDungService {
 
     Nguoidung taoNguoiDung(UserCreateDTO userCreateDTO);
 
-    Optional<NguoiDungDTO> findById(String id);
+    NguoiDungDTO findById(String id);
 
     Nguoidung updateNameGender(UserUpdateDTO userUpdateDTO);
 

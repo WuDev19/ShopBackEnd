@@ -25,9 +25,7 @@ public class NguoiDungController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<NguoiDungDTO> getNguoiDungTheoId(@PathVariable("id") String id) {
-        return nguoiDungService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(nguoiDungService.findById(id));
     }
 
     @PatchMapping("/update/name/gender")

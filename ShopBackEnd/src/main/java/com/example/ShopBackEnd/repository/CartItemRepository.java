@@ -14,7 +14,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 
     @Query(value = """
             SELECT ci.*
-            FROM GioHang gh JOIN  CartItem ci
+            FROM GioHang gh JOIN CartItem ci
             ON gh.maGioHang = ci.maGioHang
             WHERE ci.maGioHang = :maGioHang AND ci.maSanPhamDetail = :maSanPhamDetail
             """,
@@ -34,5 +34,14 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
                     """,
             nativeQuery = true)
     Page<CartItem> getCartItemCuaGioHang(@Param("maGioHang") Integer maGioHang, Pageable pageable);
+
+    @Query(value = """
+            SELECT COUNT(ci.cartItemId)
+            FROM GioHang gh JOIN cartItem ci
+            ON gh.maGioHang = ci.maGioHang
+            where gh.maND = :maND
+            """,
+            nativeQuery = true)
+    int getNumberCartItem(@Param("maND") String maND);
 
 }

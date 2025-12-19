@@ -41,6 +41,11 @@ public class CartItemServiceImpl implements CartItemService {
         return response;
     }
 
+    @Override
+    public int getNumberOfCartItem(String maND) {
+        return cartItemRepository.getNumberCartItem(maND);
+    }
+
     private SanPhamChiTietDTO mapToSanPhamChiTietDTO(SanPhamChiTiet sanPhamChiTiet){
         return new SanPhamChiTietDTO(
                 sanPhamChiTiet.getMaSanPhamDeTail(),

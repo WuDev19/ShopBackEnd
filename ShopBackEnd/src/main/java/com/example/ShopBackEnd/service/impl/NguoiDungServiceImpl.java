@@ -1,5 +1,6 @@
 package com.example.ShopBackEnd.service.impl;
 
+import com.example.ShopBackEnd.constants.StringConst;
 import com.example.ShopBackEnd.dto.get.DiaChiDTO;
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
 import com.example.ShopBackEnd.dto.request.UserCreateDTO;
@@ -37,7 +38,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     }
 
     @Override
-    public Optional<NguoiDungDTO> findById(String id) {
+    public NguoiDungDTO findById(String id) {
         return repository.findById(id)
                 .map(nd -> {
                     NguoiDungDTO dto = new NguoiDungDTO();
@@ -57,12 +58,13 @@ public class NguoiDungServiceImpl implements NguoiDungService {
                                     d.getQuocGia()))
                             .collect(Collectors.toSet()));
                     return dto;
-                });
+                }).orElseThrow(() -> new ResourcesNotFoundException(StringConst.RESOURCE_NOT_FOUND));
     }
 
     @Override
     public Nguoidung updateNameGender(UserUpdateDTO userUpdateDTO) {
-        Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow();
+        Nguoidung nguoidung = repository.findById(userUpdateDTO.getMaND()).orElseThrow(() ->
+                new ResourcesNotFoundException(StringConst.RESOURCE_NOT_FOUND));
         if (userUpdateDTO.getTen() != null) {
             nguoidung.setTen(userUpdateDTO.getTen());
         }
@@ -87,7 +89,8 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 
     @Override
     public Nguoidung updatePhone(String id, String phone) {
-        Nguoidung nguoidung = repository.findById(id).orElseThrow();
+        Nguoidung nguoidung = repository.findById(id).orElseThrow(() ->
+                new ResourcesNotFoundException(StringConst.RESOURCE_NOT_FOUND));
         if (phone != null) {
             nguoidung.setSdt(phone);
         }
@@ -96,7 +99,8 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 
     @Override
     public Nguoidung updateEmail(String id, String email) {
-        Nguoidung nguoidung = repository.findById(id).orElseThrow();
+        Nguoidung nguoidung = repository.findById(id).orElseThrow(() ->
+                new ResourcesNotFoundException(StringConst.RESOURCE_NOT_FOUND));
         if (email != null) {
             nguoidung.setEmail(email);
         }
@@ -106,7 +110,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     @Override
     public Nguoidung updateAvatar(String id, String urlAvatar) {
         Nguoidung nguoidung = repository.findById(id).orElseThrow(() ->
-                new ResourcesNotFoundException("Không tìm thấy người dùng"));
+                new ResourcesNotFoundException(StringConst.RESOURCE_NOT_FOUND));
         if (urlAvatar != null) {
             nguoidung.setAnhdaidien(urlAvatar);
         }

@@ -21,4 +21,9 @@ public class CartItemController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/get/numberCartItem/{id}")
+    public ResponseEntity<?> getNumberOfCartItem(@PathVariable String id){
+        return ResponseEntity.ok(cartItemService.getNumberOfCartItem(id));
+    }
+
 }
