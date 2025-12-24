@@ -1,8 +1,10 @@
 package com.example.ShopBackEnd.controller;
 
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
+import com.example.ShopBackEnd.dto.request.DiaChiRequest;
 import com.example.ShopBackEnd.dto.request.UserCreateDTO;
 import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
+import com.example.ShopBackEnd.entity.DiaChi;
 import com.example.ShopBackEnd.service.inter.NguoiDungService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +48,11 @@ public class NguoiDungController {
     @PatchMapping("/update/avt/{id}")
     public ResponseEntity<?> updateAvatar(@PathVariable String id, @RequestParam String url){
         return ResponseEntity.ok(nguoiDungService.updateAvatar(id, url));
+    }
+
+    @PatchMapping("update/address/{id}")
+    public ResponseEntity<?> updateAddress(@PathVariable String id, @RequestBody DiaChiRequest diaChiRequest){
+        return ResponseEntity.ok(nguoiDungService.updateAddress(id, diaChiRequest));
     }
 
 }

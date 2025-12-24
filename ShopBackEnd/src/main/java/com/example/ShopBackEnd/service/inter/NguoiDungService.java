@@ -1,6 +1,7 @@
 package com.example.ShopBackEnd.service.inter;
 
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
+import com.example.ShopBackEnd.dto.request.DiaChiRequest;
 import com.example.ShopBackEnd.dto.request.UserCreateDTO;
 import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
@@ -18,4 +19,7 @@ public interface NguoiDungService {
     Nguoidung updateEmail(String id, String email);
 
     Nguoidung updateAvatar(String id, String urlAvatar);
+
+    Nguoidung updateAddress(String id, DiaChiRequest diaChiRequest);
+
 }

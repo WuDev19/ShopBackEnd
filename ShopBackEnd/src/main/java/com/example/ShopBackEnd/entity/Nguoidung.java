@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -50,15 +52,15 @@ public class Nguoidung {
             joinColumns = @JoinColumn(name = "maND"),
             inverseJoinColumns = @JoinColumn(name = "maDiaChi"))
     @JsonManagedReference("nguoidung-diachi")
-    private Set<DiaChi> listDiaChi;
+    private Set<DiaChi> listDiaChi = new HashSet<>();
 
     @OneToMany(mappedBy = "ndDh", fetch = FetchType.LAZY) //ko co cascade vi neu da len don hang xac nhan roi thi neu co xoa nguoi dung thi don hang van se giao
     @JsonBackReference("nd_dh")
-    private Set<DonHang> donHangs;
+    private Set<DonHang> donHangs = new HashSet<>();
 
     @OneToMany(mappedBy = "nd_gh", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<GioHang> gioHangs;
+    private Set<GioHang> gioHangs = new HashSet<>();
 
     public Nguoidung() {
     }
@@ -165,6 +167,11 @@ public class Nguoidung {
     public void addGioHang(GioHang gioHang){
         gioHang.setNd_gh(this);
         gioHangs.add(gioHang);
+    }
+
+    public void addAddress (DiaChi diaChi){
+        listDiaChi.add(diaChi);
+        diaChi.getListNguoiDung().add(this);
     }
 
 }

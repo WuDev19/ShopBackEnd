@@ -3,18 +3,15 @@ package com.example.ShopBackEnd.service.impl;
 import com.example.ShopBackEnd.constants.StringConst;
 import com.example.ShopBackEnd.dto.get.DiaChiDTO;
 import com.example.ShopBackEnd.dto.get.NguoiDungDTO;
+import com.example.ShopBackEnd.dto.request.DiaChiRequest;
 import com.example.ShopBackEnd.dto.request.UserCreateDTO;
 import com.example.ShopBackEnd.dto.request.UserUpdateDTO;
 import com.example.ShopBackEnd.entity.Nguoidung;
 import com.example.ShopBackEnd.exception.customexception.ResourcesNotFoundException;
+import com.example.ShopBackEnd.mapper.DiaChiMapper;
 import com.example.ShopBackEnd.repository.NguoiDungRepository;
 import com.example.ShopBackEnd.service.inter.NguoiDungService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -114,6 +111,14 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         if (urlAvatar != null) {
             nguoidung.setAnhdaidien(urlAvatar);
         }
+        return repository.save(nguoidung);
+    }
+
+    @Override
+    public Nguoidung updateAddress(String id, DiaChiRequest diaChiRequest) {
+        Nguoidung nguoidung = repository.findById(id).orElseThrow(() ->
+                new ResourcesNotFoundException(StringConst.RESOURCE_NOT_FOUND));
+        nguoidung.addAddress(DiaChiMapper.mapToDiaChi(diaChiRequest));
         return repository.save(nguoidung);
     }
 

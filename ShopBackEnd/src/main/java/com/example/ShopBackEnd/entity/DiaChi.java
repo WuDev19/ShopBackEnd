@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,29 +17,24 @@ public class DiaChi {
     @Column(name = "maDiaChi")
     private Integer maDiaChi;
 
-    @NotNull(message = "Không được để trống")
     @Size(max = 100, message = "Không được vượt quá 100 kí tụ")
-    @Column(name = "tenCuThe", length = 100, nullable = false)
+    @Column(name = "tenCuThe", length = 100)
     private String tenCuThe;
 
-    @NotNull
     @Size(max = 50)
-    @Column(name = "tenXa", nullable = false, length = 50)
+    @Column(name = "tenXa", length = 50)
     private String tenXa;
 
-    @NotNull
     @Size(max = 50)
-    @Column(name = "tenHuyen", nullable = false, length = 50)
+    @Column(name = "tenHuyen", length = 50)
     private String tenHuyen;
 
-    @NotNull
     @Size(max = 50)
-    @Column(name = "tenThanhPho", nullable = false, length = 50)
+    @Column(name = "tenThanhPho", length = 50)
     private String tenThanhPho;
 
-    @NotNull
     @Size(max = 50)
-    @Column(name = "quocGia", nullable = false, length = 50)
+    @Column(name = "quocGia", length = 50)
     private String quocGia;
 
     @OneToOne(mappedBy = "diaChi", fetch = FetchType.LAZY)
@@ -46,7 +43,7 @@ public class DiaChi {
 
     @ManyToMany(mappedBy = "listDiaChi", fetch = FetchType.LAZY)
     @JsonBackReference("nguoidung-diachi")
-    private Set<Nguoidung> listNguoiDung;
+    private Set<Nguoidung> listNguoiDung = new HashSet<>();
 
     public DiaChi(String tenCuThe, String tenXa, String tenHuyen, String tenThanhPho, String quocGia) {
         this.tenCuThe = tenCuThe;
